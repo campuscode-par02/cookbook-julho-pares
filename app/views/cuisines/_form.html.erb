@@ -1,0 +1,15 @@
+<div>
+  <% if @cuisine.errors.any? %>
+    <% @cuisine.errors.full_messages.each do |msg|  %>
+     <%= msg %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= form_with model: @cuisine do |f| %>
+  <div class="form-group">
+    <%= f.label :name, 'Nome' %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <%= f.submit 'Cadastrar', class: 'btn btn-primary' %>
+<% end %>

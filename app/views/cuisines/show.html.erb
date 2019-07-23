@@ -1,0 +1,7 @@
+<div>
+  <%= flash[:success] %>
+</div>
+
+<h1><%= @cuisine.name %></h1>
+
+<%= render partial: 'recipes/recipe', collection: @cuisine.recipes %>
