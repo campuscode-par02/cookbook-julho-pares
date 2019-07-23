@@ -12,8 +12,6 @@ class CuisinesController < ApplicationController
     @cuisine = Cuisine.new(cuisine_params)
     flash[:success] = "Cozinha cadastrada com sucesso"
     return redirect_to @cuisine if @cuisine.save
-
-    flash[:error] = "Você deve informar o nome da cozinha"
     render :new
   end
 
