@@ -18,6 +18,13 @@
       <li class="nav-item">
         <%= link_to 'Cadastrar cozinha', new_cuisine_path, class: 'nav-link' %>
       </li>
+      <li class="nav-item">
+        <%= form_tag("/search", method: "get") do %>
+          <%= label_tag(:q, "Digite o nome da receita") %>
+          <%= text_field_tag(:q) %>
+          <%= submit_tag("Pesquisar") %>
+        <% end %>
+      </li>
     </ul>
   </div>
 </nav>

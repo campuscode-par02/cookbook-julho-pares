@@ -1,0 +1,6 @@
+<% if @recipes.any? %>
+  <h1><%= pluralize(@recipes.count, 'receita encontrada', plural: 'receitas encontradas') %></h1>
+  <%= render @recipes %>
+<% else %>
+  <h1>Nenhuma receita encontrada :(</h1>
+<% end %>
