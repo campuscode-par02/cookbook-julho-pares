@@ -25,6 +25,13 @@
           <%= submit_tag("Pesquisar") %>
         <% end %>
       </li>
+      <% if user_signed_in? %>
+         Bem vindo <%= current_user.email %> | <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to 'Entrar', new_user_session_path, class: 'nav-link' %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>
