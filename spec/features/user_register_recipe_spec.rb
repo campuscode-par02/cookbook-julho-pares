@@ -46,8 +46,15 @@ feature 'User register recipe' do
   end
 
   scenario 'and must fill in all fields' do
+    #cria os dados necessários, nesse caso não vamos criar dados no banco
+    user = User.create(email: 'par02@campuscode.com.br', password: '123456')
+    
     # simula a ação do usuário
     visit root_path
+    click_on 'Entrar'
+    fill_in 'Email', with: user.email
+    fill_in 'Senha', with: '123456'
+    click_on 'Logar'
     click_on 'Enviar uma receita'
 
     fill_in 'Título', with: ''

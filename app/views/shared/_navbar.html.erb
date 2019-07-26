@@ -10,6 +10,12 @@
         <a class="nav-link" href="<%= root_path %>">Home <span class="sr-only">(current)</span></a>
       </li>
 
+       <% if user_signed_in? %>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= lists_path %>">Minhas listas</a>
+        </li>
+      <% end %>
+
       <% if user_signed_in? %>
         <li class="nav-item">
           <a class="nav-link" href="<%= new_recipe_path %>">Enviar uma receita</a>

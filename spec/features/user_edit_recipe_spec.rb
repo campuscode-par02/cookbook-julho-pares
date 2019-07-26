@@ -1,6 +1,51 @@
 require 'rails_helper'
 
 feature 'User update recipe' do
+
+  scenario 'only if signed in' do
+
+    #arrange
+    user = User.create(email: "joao@joao.com", password: "123456")
+    recipe_type = RecipeType.create(name: 'Sobremesa')
+    cuisine = Cuisine.create(name: 'Brasileira')
+    Cuisine.create(name: 'Arabe')
+    Recipe.create(title: 'Bolodecenoura', difficulty: 'Médio',
+                  recipe_type: recipe_type, cuisine: cuisine,
+                  cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
+                  cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes', user: user)
+
+    #act
+    visit root_path
+    click_on 'Bolodecenoura'
+
+    #assert
+    expect(page).not_to have_link('Editar')
+  end
+
+  scenario 'must be the recipe owner' do
+    #arrange
+    user = User.create(email: "joao@joao.com", password: "123456")
+    recipe_type = RecipeType.create(name: 'Sobremesa')
+    cuisine = Cuisine.create(name: 'Brasileira')
+    Cuisine.create(name: 'Arabe')
+    Recipe.create(title: 'Bolodecenoura', difficulty: 'Médio',
+                  recipe_type: recipe_type, cuisine: cuisine,
+                  cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
+                  cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes', user: user)
+    other_user = User.create(email: 'rafael@rafael.com', password: '123456')
+
+    #act
+    visit root_path
+    click_on 'Entrar'
+    fill_in 'Email', with: other_user.email
+    fill_in 'Senha', with: '123456'
+    click_on 'Logar'
+    click_on 'Bolodecenoura'
+
+    #assert
+    expect(page).not_to have_link('Editar')
+  end
+
   scenario 'successfully' do
     recipe_type = RecipeType.create(name: 'Sobremesa')
     RecipeType.create(name: 'Entrada')
