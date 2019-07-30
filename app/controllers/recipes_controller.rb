@@ -39,6 +39,10 @@ class RecipesController < ApplicationController
     @recipes = Recipe.where("title LIKE ?", "%#{params[:q]}%")
   end
 
+  def my_recipes
+    @recipes = current_user.recipes
+  end
+
   private
 
   def set_recipe
@@ -48,6 +52,6 @@ class RecipesController < ApplicationController
   def recipe_params
     params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id,
                                    :difficulty, :cook_time, :ingredients,
-                                   :cook_method)
+                                   :cook_method, :photo)
   end
 end
