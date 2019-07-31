@@ -43,6 +43,17 @@ class RecipesController < ApplicationController
     @recipes = current_user.recipes
   end
 
+  def message
+    recipe_id = params[:recipe_id].to_i
+    name_from = params[:from]
+    email_to = params[:to]
+    msg = params[:message]
+    recipe = Recipe.find(recipe_id)
+    RecipesMailer.send_recipe(recipe_id, name_from, email_to, msg).deliver_now
+    flash[:notice] = 'Mensagem enviada com sucesso'
+    redirect_to recipe
+  end
+
   private
 
   def set_recipe

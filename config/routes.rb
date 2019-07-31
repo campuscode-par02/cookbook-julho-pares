@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'recipes#index'
 
-  resources :recipes
+  resources :recipes do
+    post 'message'
+  end
   resources :recipe_types, only: %i[show new create]
   resources :cuisines, only: %i[show new create]
   resources :lists

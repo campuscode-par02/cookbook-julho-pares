@@ -28,11 +28,8 @@ feature 'User view lists' do
     list_recipe = ListRecipe.create(list: list, recipe: recipe)
 
     #act
+    login_as(user)
     visit root_path
-    click_on 'Entrar'
-    fill_in 'Email', with: user.email
-    fill_in 'Senha', with: '123456'
-    click_on 'Logar'
     click_on 'Minhas listas'
     click_on 'Churras da Campus'
 
